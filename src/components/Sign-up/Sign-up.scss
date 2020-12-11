@@ -1,0 +1,21 @@
+.flex {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 460px;
+  margin: 0 auto;
+}
+
+.input-field {
+  width: 210px;
+}
+
+.button__regist {
+  margin: 50px auto 0;
+
+  &-link {
+    padding: 0 46px;
+  }
+}
+
+
