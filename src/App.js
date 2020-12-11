@@ -1,5 +1,9 @@
 import { useState, useEffect } from 'react';
 
+import { useDispatch, useSelector} from 'react-redux';
+
+import { setUsers } from './redux/actions';
+
 import { Navbar } from './components/Navbar/Navbar';
 import { Modal } from './components/Modal/Modal';
 import { SignIn } from './components/Sign-in/Sign-in';
@@ -10,12 +14,14 @@ import './App.scss';
 function App() {
   const [modalActive, setModalActive] = useState(false);
   const [isRegister, setRegister] = useState(false);
-  const [users, setUsers] = useState([]);
+
+  const users = useSelector(state => state.users);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const saved = JSON.parse(localStorage.getItem('users') || '[]');
+    const saved = JSON.parse(localStorage.getItem('users') || []);
 
-    setUsers(saved);
+    dispatch(setUsers(saved));
   }, []);
 
   useEffect(() => {
@@ -36,19 +42,23 @@ function App() {
     };
 
   }, []);
-
+  
   function handleModal(value) {
     setModalActive(value);
     setRegister(value);
   }
 
-  console.log(users);
+  
+  function setNewUser(newUser, wrongPassword) {
+    if (!newUser || wrongPassword) {
+      return ;
+    }
 
-  function setNewUser(newUser) {
-    setUsers(prev => [newUser, ...prev]);
+    dispatch(setUsers([newUser]));
     setRegister(false);
   }
 
+  console.log(users);
   return (
     <div className="app">
       <Navbar setModalActive={setModalActive}  handleModal={handleModal} />

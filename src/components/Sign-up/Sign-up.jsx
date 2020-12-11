@@ -6,22 +6,26 @@ export function SignUp({ setNewUser }) {
   const [fullName, setFullName] = useState('');
   const [position, setPosition] = useState('');
   const [phone, setPhone] = useState('');
-  const [login, setLogin] = useState('');
-  const [password, setPassword] = useState('');
+  const [signUpLogin, setSignUpLogin] = useState('');
+  const [signUpPassword, setSignUpPassword] = useState('');
   const [reTypePassword, setReTypePassword] = useState('');
+  const [errors, setErrors] = useState({});
 
-  function handleSubmit(e) {
+  function handleSignUpSubmit(e) {
     e.preventDefault();
   
+    if (errors.reTypePassword) {
+      return ;
+    }
+
     const newUser = {
       fullName,
       position,
       phone,
-      login,
-      password,
+      signUpLogin,
+      signUpPassword,
       reTypePassword,
     }
-
 
     // call function witch take a user
     setNewUser(newUser);
@@ -30,15 +34,23 @@ export function SignUp({ setNewUser }) {
     setFullName('');
     setPosition('');
     setPhone('');
-    setLogin('');
-    setPassword('');
+    setSignUpLogin('');
+    setSignUpPassword('');
     setReTypePassword('');
-
-    // Return to "Sign In"
   }
 
+  function handleReTypePassword() {
+    if (errors.reTypePassword) {
+      setErrors({});
+    }
+  
+    if (signUpPassword !== reTypePassword) {
+      setErrors({reTypePassword: 'Passwords do not match'});
+    }
+  } 
+
   return (
-		<form className="register-form flex" onSubmit={(e) => handleSubmit(e)}>        
+		<form className="register-form flex" onSubmit={(e) => handleSignUpSubmit(e)}>        
       <div className="input-field">
         <input
           className="validate"
@@ -46,7 +58,6 @@ export function SignUp({ setNewUser }) {
           placeholder="Full Name"
           value={fullName}
           onChange={(e) => setFullName(e.target.value)}
-          required
         />
       </div>
 
@@ -57,7 +68,6 @@ export function SignUp({ setNewUser }) {
           placeholder="Position"
           value={position}
           onChange={(e) => setPosition(e.target.value)}
-          required
         />
       </div>
 
@@ -69,7 +79,6 @@ export function SignUp({ setNewUser }) {
           placeholder="Number of phone"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
-          required
         />
       </div>
 
@@ -79,8 +88,8 @@ export function SignUp({ setNewUser }) {
           className="validate"
           type="email"
           placeholder="Login"
-          value={login}
-          onChange={(e) => setLogin(e.target.value)}
+          value={signUpLogin}
+          onChange={(e) => setSignUpLogin(e.target.value)}
           required
         />
       </div>
@@ -90,8 +99,8 @@ export function SignUp({ setNewUser }) {
           className="validate"
           type="password"
           placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={signUpPassword}
+          onChange={(e) => setSignUpPassword(e.target.value)}
           required
         />
       </div>
@@ -103,8 +112,11 @@ export function SignUp({ setNewUser }) {
           placeholder="Re-type password"
           value={reTypePassword}
           onChange={(e) => setReTypePassword(e.target.value)}
+          onBlur={() => handleReTypePassword()}
           required
         />
+
+        { errors?.reTypePassword && <div className="errors">{ errors.reTypePassword }</div> }
       </div>
 
       <div className="button__regist">
