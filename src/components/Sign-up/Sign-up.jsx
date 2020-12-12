@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+
+import { UserList } from '../PageUser/UserList/UserList';
 
 import './Sign-up.scss';
 
-export function SignUp({ setNewUser }) {
+export function SignUp({ setNewUser, setRegister, isRegiste }) {
   const [fullName, setFullName] = useState('');
   const [position, setPosition] = useState('');
   const [phone, setPhone] = useState('');
@@ -12,6 +15,8 @@ export function SignUp({ setNewUser }) {
 
   const [errors, setErrors] = useState({});
 
+  const users = useSelector(state => state.users);
+
   function handleSignUpSubmit(e) {
     e.preventDefault();
 
@@ -19,6 +24,7 @@ export function SignUp({ setNewUser }) {
       return ;
     }
 
+    // create user
     const newUser = {
       fullName,
       position,
@@ -26,9 +32,10 @@ export function SignUp({ setNewUser }) {
       signUpLogin,
       signUpPassword,
       reTypePassword,
+      id: users.length + 1,
     }
 
-    // call function witch take a user
+    // add user into array users
     setNewUser(newUser);
 
     // clear all input-field
@@ -58,7 +65,7 @@ export function SignUp({ setNewUser }) {
           type="text"
           placeholder="Full Name"
           value={fullName}
-          onChange={(e) => setFullName(e.target.value)}
+          onChange={({ target }) => setFullName(target.value)}
         />
       </div>
 
@@ -68,7 +75,7 @@ export function SignUp({ setNewUser }) {
           type="text"
           placeholder="Position"
           value={position}
-          onChange={(e) => setPosition(e.target.value)}
+          onChange={({ target }) => setPosition(target.value)}
         />
       </div>
 
@@ -79,7 +86,7 @@ export function SignUp({ setNewUser }) {
           name="tel"
           placeholder="Number of phone"
           value={phone}
-          onChange={(e) => setPhone(e.target.value)}
+          onChange={({ target }) => setPhone(target.value)}
         />
       </div>
 
@@ -89,7 +96,7 @@ export function SignUp({ setNewUser }) {
           type="email"
           placeholder="Login"
           value={signUpLogin}
-          onChange={(e) => setSignUpLogin(e.target.value)}
+          onChange={({ target }) => setSignUpLogin(target.value)}
           required
         />
       </div>
@@ -100,7 +107,7 @@ export function SignUp({ setNewUser }) {
           type="password"
           placeholder="Password"
           value={signUpPassword}
-          onChange={(e) => setSignUpPassword(e.target.value)}
+          onChange={({ target }) => setSignUpPassword(target.value)}
           required
         />
       </div>
@@ -111,7 +118,7 @@ export function SignUp({ setNewUser }) {
           type="password"
           placeholder="Re-type password"
           value={reTypePassword}
-          onChange={(e) => setReTypePassword(e.target.value)}
+          onChange={({ target }) => setReTypePassword(target.value)}
           onBlur={() => handleReTypePassword()}
           required
         />
@@ -120,6 +127,7 @@ export function SignUp({ setNewUser }) {
       </div>
 
       <div className="button__regist">
+        <a className="btn waves-effect button__regist-link" onClick={() => setRegister(false)}>Back</a>
         <button className="btn waves-effect button__regist-link">Sign Up</button>
       </div>
 		</form>

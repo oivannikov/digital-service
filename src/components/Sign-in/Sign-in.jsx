@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import classNames from 'classnames';
+
 import { useDispatch, useSelector } from 'react-redux';
 
 import { setAuthUser, setCurrentUser } from '../../redux/actions';
@@ -9,27 +11,27 @@ import './Sign-in.scss';
 export function SignIn({ setRegister }) {
   const [signInLogin, setSignInLogin] = useState('');
   const [signInPassword, setSignInPassword] = useState('');
+  const [errorSignIn, setErrorSignIn] = useState(false);
 
   const users = useSelector(state => state.users);
-  const authUser = useSelector(state => state.authUser);
   const dispatch = useDispatch();
 
-  console.log(authUser);  
-  function handleSignInSubmit(e) {
-    e.preventDefault();
-  
+  function handleSignInSubmit() {
     const user = users.find(user => signInLogin === user.signUpLogin && signInPassword === user.signUpPassword);
 
     if (!user) {
+      setErrorSignIn(true);
+
       return ;
     }
 
     dispatch(setCurrentUser(user));
     dispatch(setAuthUser(true));
+    setErrorSignIn(false);
   }
 
   return (
-    <form className="register-from" onSubmit={(e) => handleSignInSubmit(e)}>
+    <form className="register-from" onSubmit={handleSignInSubmit}>
       <div className="row margin">
         <div className="input-field col s12">
           <input
@@ -37,7 +39,7 @@ export function SignIn({ setRegister }) {
             type="email"
             placeholder="Login"
             value={signInLogin}
-            onChange={(e) => setSignInLogin(e.target.value)}
+            onChange={({ target }) => setSignInLogin(target.value)}
             required
           />
         </div>
@@ -50,7 +52,7 @@ export function SignIn({ setRegister }) {
             type="password"
             placeholder="Password"
             value={signInPassword}
-            onChange={(e) => setSignInPassword(e.target.value)}
+            onChange={({ target }) => setSignInPassword(target.value)}
             required
           />
         </div>
@@ -62,9 +64,18 @@ export function SignIn({ setRegister }) {
         </div>
 
         <div className="input-field col s12">
-          <p className="margin center medium-small sign-up">
+          <p className="margin center medium-small sign-up text">
             Don't have an account?
-            <a onClick={() => setRegister(true)} href="#"> Register now</a>
+
+            <a
+              className={classNames('register', {'prompt': errorSignIn})}
+              onClick={() => setRegister(true)}
+              href="#"
+            >
+              &thinsp;Register now
+            </a>
+
+            <span className={classNames(!errorSignIn ? 'hide' : 'show')}> or try again</span>
           </p>
         </div>
       </div>

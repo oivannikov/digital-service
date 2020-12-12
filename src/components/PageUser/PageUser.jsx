@@ -1,16 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import { useSelector, useDispatch } from 'react-redux';
-import { setAuthUser } from '../../redux/actions';
+import { InputButton } from './InputButton/InputButton';
+import { UserList } from './UserList/UserList';
+import { UserEdit } from './UserEdit/UserEdit';
+import { Navbar } from './Navbar/Navbar';
+
+import './PageUser.scss';
 
 export function PageUser() {
-  const user = useSelector(state => state.currentUser);
-  const dispatch = useDispatch();
+  const [tab, setTab] = useState('userList');
 
   return (
-    <>
-      <button onClick={() => dispatch(setAuthUser(false))}></button>
-      <h1>{user.fullName}</h1>
-    </>
+    <div className="page">
+      <Navbar onTabChange={setTab} />
+
+      { tab === 'userList' && <UserList /> }
+      { tab === 'userEdit' && <UserEdit onTabChange={setTab} /> }``
+      { tab === 'userButton' && <InputButton /> }
+
+      {/* <button className="btn pages__button" onClick={() => dispatch(setAuthUser(false))}>Return</button> */}
+    </div>
   );
 }

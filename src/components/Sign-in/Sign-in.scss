@@ -1,17 +1,26 @@
-img {
-  display: none;
-}
-
-
 .validate,
 .validate::placeholder {
   color: #26a69a;
   opacity: 0.7;
 }
 
-.align {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+.register {
+  transition: 1.5s;
+}
+
+.prompt {
+  transition: font-size 1.5s;
+  font-size: 18px;
+}
+
+.text {
+  position: relative;
+}
+
+.hide {
+  visibility: hidden;
+}
+
+.show {
+  visibility: visible;
 }
