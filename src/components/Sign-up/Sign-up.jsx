@@ -9,12 +9,13 @@ export function SignUp({ setNewUser }) {
   const [signUpLogin, setSignUpLogin] = useState('');
   const [signUpPassword, setSignUpPassword] = useState('');
   const [reTypePassword, setReTypePassword] = useState('');
+
   const [errors, setErrors] = useState({});
 
   function handleSignUpSubmit(e) {
     e.preventDefault();
-  
-    if (errors.reTypePassword) {
+
+    if (errors.errorReTypePassword) {
       return ;
     }
 
@@ -40,17 +41,17 @@ export function SignUp({ setNewUser }) {
   }
 
   function handleReTypePassword() {
-    if (errors.reTypePassword) {
+    if (errors.errorReTypePassword) {
       setErrors({});
     }
-  
+
     if (signUpPassword !== reTypePassword) {
-      setErrors({reTypePassword: 'Passwords do not match'});
+      setErrors({errorReTypePassword: 'Passwords do not match'});
     }
-  } 
+  }
 
   return (
-		<form className="register-form flex" onSubmit={(e) => handleSignUpSubmit(e)}>        
+		<form className="register-form flex" onSubmit={(e) => handleSignUpSubmit(e)}> 
       <div className="input-field">
         <input
           className="validate"
@@ -81,7 +82,6 @@ export function SignUp({ setNewUser }) {
           onChange={(e) => setPhone(e.target.value)}
         />
       </div>
-
 
       <div className="input-field">
         <input
@@ -116,12 +116,12 @@ export function SignUp({ setNewUser }) {
           required
         />
 
-        { errors?.reTypePassword && <div className="errors">{ errors.reTypePassword }</div> }
+        { errors?.errorReTypePassword && <div className="errors">{ errors.errorReTypePassword }</div> }
       </div>
 
       <div className="button__regist">
         <button className="btn waves-effect button__regist-link">Sign Up</button>
       </div>
 		</form>
-  )
+  );
 }

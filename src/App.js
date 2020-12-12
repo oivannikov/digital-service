@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 
 import { useDispatch, useSelector} from 'react-redux';
-
 import { setUsers } from './redux/actions';
 
 import { Navbar } from './components/Navbar/Navbar';
 import { Modal } from './components/Modal/Modal';
 import { SignIn } from './components/Sign-in/Sign-in';
 import { SignUp } from './components/Sign-up/Sign-up';
+import { PageUser } from './components/PageUser/PageUser';
 
 import './App.scss';
 
@@ -16,6 +16,8 @@ function App() {
   const [isRegister, setRegister] = useState(false);
 
   const users = useSelector(state => state.users);
+  console.log(users);
+  const authUser = useSelector(state => state.authUser);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -42,31 +44,28 @@ function App() {
     };
 
   }, []);
-  
+
   function handleModal(value) {
     setModalActive(value);
     setRegister(value);
   }
 
-  
-  function setNewUser(newUser, wrongPassword) {
-    if (!newUser || wrongPassword) {
-      return ;
-    }
-
-    dispatch(setUsers([newUser]));
+  function setNewUser(newUser) {
+    dispatch(setUsers([...users, newUser]));
     setRegister(false);
   }
 
-  console.log(users);
   return (
     <div className="app">
       <Navbar setModalActive={setModalActive}  handleModal={handleModal} />
 
-      <Modal active={modalActive} handleModal={handleModal}>
-        { !isRegister ? <SignIn setRegister={setRegister} /> : <SignUp setNewUser={setNewUser} /> }
-      </Modal>
+      { !authUser
+        ? <Modal active={modalActive} handleModal={handleModal}>
+            { !isRegister ? <SignIn setRegister={setRegister} /> : <SignUp setNewUser={setNewUser} /> }
+          </Modal>
 
+        : <PageUser />
+      }
     </div>
   );
 }
