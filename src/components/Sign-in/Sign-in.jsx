@@ -16,7 +16,7 @@ export function SignIn({ setRegister }) {
   const users = useSelector(state => state.users);
   const dispatch = useDispatch();
 
-  function handleSignInSubmit() {
+  function handleSignInSubmit(e) {
     e.preventDefault();
 
     const user = users.find(user => signInLogin === user.signUpLogin && signInPassword === user.signUpPassword);
