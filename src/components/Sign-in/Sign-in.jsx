@@ -17,6 +17,8 @@ export function SignIn({ setRegister }) {
   const dispatch = useDispatch();
 
   function handleSignInSubmit() {
+    e.preventDefault();
+
     const user = users.find(user => signInLogin === user.signUpLogin && signInPassword === user.signUpPassword);
 
     if (!user) {
@@ -31,7 +33,7 @@ export function SignIn({ setRegister }) {
   }
 
   return (
-    <form className="register-from" onSubmit={handleSignInSubmit}>
+    <form className="register-from" onSubmit={(e) => handleSignInSubmit(e)}>
       <div className="row margin">
         <div className="input-field col s12">
           <input
