@@ -15,7 +15,7 @@ export function PageUser() {
       <Navbar onTabChange={setTab} />
 
       { tab === 'userList' && <UserList /> }
-      { tab === 'userEdit' && <UserEdit onTabChange={setTab} /> }``
+      { tab === 'userEdit' && <UserEdit onTabChange={setTab} /> }
       { tab === 'userButton' && <InputButton /> }
 
       {/* <button className="btn pages__button" onClick={() => dispatch(setAuthUser(false))}>Return</button> */}
