@@ -12,6 +12,7 @@ export function SignIn({ setRegister }) {
   const [signInLogin, setSignInLogin] = useState('');
   const [signInPassword, setSignInPassword] = useState('');
   const [errorSignIn, setErrorSignIn] = useState(false);
+  const [errors, setErrors] = useState({});
 
   const users = useSelector(state => state.users);
   const dispatch = useDispatch();
@@ -22,14 +23,26 @@ export function SignIn({ setRegister }) {
     const user = users.find(user => signInLogin === user.signUpLogin && signInPassword === user.signUpPassword);
 
     if (!user) {
+      setErrors({errorSignIn: 'Wrong password or login'});
       setErrorSignIn(true);
 
       return ;
     }
 
+    setErrors({});
     dispatch(setCurrentUser(user));
     dispatch(setAuthUser(true));
     setErrorSignIn(false);
+  }
+
+  function handleSignInLogin(target) {
+    setSignInLogin(target.value);
+    setErrors({});
+  }
+
+  function handleSignInPassword(target) {
+    setSignInPassword(target.value);
+    setErrors({});
   }
 
   return (
@@ -41,7 +54,7 @@ export function SignIn({ setRegister }) {
             type="email"
             placeholder="Login"
             value={signInLogin}
-            onChange={({ target }) => setSignInLogin(target.value)}
+            onChange={({ target }) => handleSignInLogin(target)}
             required
           />
         </div>
@@ -54,9 +67,11 @@ export function SignIn({ setRegister }) {
             type="password"
             placeholder="Password"
             value={signInPassword}
-            onChange={({ target }) => setSignInPassword(target.value)}
+            onChange={({ target }) => handleSignInPassword(target)}
             required
           />
+
+          {errors.errorSignIn && <div className="errors">{errors.errorSignIn}</div>}
         </div>
       </div>
 
@@ -69,17 +84,16 @@ export function SignIn({ setRegister }) {
           <p className="margin center medium-small sign-up text">
             Don't have an account?
 
-            <a
+            <span
               className={classNames('register', {'prompt': errorSignIn})}
               onClick={() => setRegister(true)}
-              href="#"
+              // href="#"
             >
               &thinsp;Register now
-            </a>
-
-            <span className={classNames(!errorSignIn ? 'hide' : 'show')}> or try again</span>
+            </span>
           </p>
         </div>
+
       </div>
     </form>
   );

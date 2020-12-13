@@ -1,3 +1,10 @@
+.form__sign-in {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+}
+
 .validate,
 .validate::placeholder {
   color: #26a69a;
@@ -6,6 +13,8 @@
 
 .register {
   transition: 1.5s;
+  color: #26a69a;
+  cursor: pointer;
 }
 
 .prompt {
@@ -17,10 +26,6 @@
   position: relative;
 }
 
-.hide {
-  visibility: hidden;
-}
-
-.show {
-  visibility: visible;
+.row .col {
+  padding: 0;
 }

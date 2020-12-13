@@ -14,11 +14,13 @@ export function PageUser() {
     <div className="page">
       <Navbar onTabChange={setTab} />
 
-      { tab === 'userList' && <UserList /> }
-      { tab === 'userEdit' && <UserEdit onTabChange={setTab} /> }
-      { tab === 'userButton' && <InputButton /> }
+      <div className="page__wrapper">
+        { tab === 'userEdit' && <UserEdit onTabChange={setTab} /> }
+        { tab === 'userList' && <UserList /> }
+        { tab === 'userButton' && <InputButton /> }
+      </div>
 
-      {/* <button className="btn pages__button" onClick={() => dispatch(setAuthUser(false))}>Return</button> */}
+      {/* <button className="btn page__button" onClick={() => dispatch(setAuthUser(false))}>Return</button> */}
     </div>
   );
 }

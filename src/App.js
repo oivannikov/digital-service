@@ -22,7 +22,7 @@ function App() {
     const saved = JSON.parse(localStorage.getItem('users') || []);
 
     dispatch(setUsers(saved));
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     localStorage.setItem('users', JSON.stringify(users));
@@ -45,6 +45,7 @@ function App() {
 
         : <PageUser />
       }
+       {/* <PageUser /> */}
     </div>
   );
 }

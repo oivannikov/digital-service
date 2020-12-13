@@ -1,26 +1,27 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
 
-import { UserList } from '../PageUser/UserList/UserList';
+import { useSelector } from 'react-redux';
 
 import './Sign-up.scss';
 
-export function SignUp({ setNewUser, setRegister, isRegiste }) {
+export function SignUp({ setNewUser, setRegister }) {
   const [fullName, setFullName] = useState('');
   const [position, setPosition] = useState('');
   const [phone, setPhone] = useState('');
   const [signUpLogin, setSignUpLogin] = useState('');
   const [signUpPassword, setSignUpPassword] = useState('');
   const [reTypePassword, setReTypePassword] = useState('');
-
   const [errors, setErrors] = useState({});
 
   const users = useSelector(state => state.users);
 
   function handleSignUpSubmit(e) {
     e.preventDefault();
-
+    
+    console.log('her1');
+  
     if (errors.errorReTypePassword) {
+      console.log('here2');
       return ;
     }
 
@@ -48,6 +49,7 @@ export function SignUp({ setNewUser, setRegister, isRegiste }) {
   }
 
   function handleReTypePassword() {
+    console.log('blur');
     if (errors.errorReTypePassword) {
       setErrors({});
     }
@@ -57,8 +59,29 @@ export function SignUp({ setNewUser, setRegister, isRegiste }) {
     }
   }
 
+  function handleSignUpPassword(target) {
+    setSignUpPassword(target.value);
+    setErrors({});
+  }
+
+  function handleSignUpReTypePassword(target) {
+    setReTypePassword(target.value);
+    setErrors({});
+  }
+
+  function handleKeyPress(e) {
+    if (e.key === 'Enter') {
+      handleReTypePassword();
+    }
+  }
+
+  function handleRegistr(e) {
+    // e.stopPropagation();
+    setRegister(false);
+  }
+
   return (
-		<form className="register-form flex" onSubmit={(e) => handleSignUpSubmit(e)}> 
+		<form className="register-form flex" onSubmit={(e) => handleSignUpSubmit(e)} onKeyPress={(e) => handleKeyPress(e)}> 
       <div className="input-field">
         <input
           className="validate"
@@ -107,7 +130,7 @@ export function SignUp({ setNewUser, setRegister, isRegiste }) {
           type="password"
           placeholder="Password"
           value={signUpPassword}
-          onChange={({ target }) => setSignUpPassword(target.value)}
+          onChange={({ target }) => handleSignUpPassword(target)}
           required
         />
       </div>
@@ -118,7 +141,7 @@ export function SignUp({ setNewUser, setRegister, isRegiste }) {
           type="password"
           placeholder="Re-type password"
           value={reTypePassword}
-          onChange={({ target }) => setReTypePassword(target.value)}
+          onChange={({ target }) => handleSignUpReTypePassword(target)}
           onBlur={() => handleReTypePassword()}
           required
         />
@@ -127,7 +150,7 @@ export function SignUp({ setNewUser, setRegister, isRegiste }) {
       </div>
 
       <div className="button__regist">
-        <a className="btn waves-effect button__regist-link" onClick={() => setRegister(false)}>Back</a>
+        <button className="btn waves-effect button__regist-link" type="button" onClick={(e) => handleRegistr(e)}>Back</button>
         <button className="btn waves-effect button__regist-link">Sign Up</button>
       </div>
 		</form>

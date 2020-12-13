@@ -7,16 +7,16 @@ export function Navbar({ onTabChange }) {
     <nav className="nav">
       <div className="nav-wrapper">
         <ul id="nav-mobile" className="right hide-on-med-and-down">
-          <li onClick={() => onTabChange('userList')}>
-            <a className="nav__item" href="#">List</a>
+          <li className="nav__item" onClick={() => onTabChange('userEdit')}>
+            Edit
           </li>
 
-          <li onClick={() => onTabChange('userEdit')}>
-            <a className="nav__item" href="#">Edit</a>
+          <li className="nav__item" onClick={() => onTabChange('userList')}>
+            List
           </li>
 
-          <li onClick={() => onTabChange('userButton')}>
-            <a className="nav__item" href="#">Display</a>
+          <li className="nav__item" onClick={() => onTabChange('userButton')}>
+            Display
           </li>
         </ul>
       </div>
