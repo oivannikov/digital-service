@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/digital-service/static/css/main.dc4a7dfa.chunk.css",
-    "main.js": "/digital-service/static/js/main.49c1ab77.chunk.js",
-    "main.js.map": "/digital-service/static/js/main.49c1ab77.chunk.js.map",
+    "main.css": "/digital-service/static/css/main.448d875c.chunk.css",
+    "main.js": "/digital-service/static/js/main.7b6bbd7d.chunk.js",
+    "main.js.map": "/digital-service/static/js/main.7b6bbd7d.chunk.js.map",
     "runtime-main.js": "/digital-service/static/js/runtime-main.de250844.js",
     "runtime-main.js.map": "/digital-service/static/js/runtime-main.de250844.js.map",
     "static/js/2.8eb4c386.chunk.js": "/digital-service/static/js/2.8eb4c386.chunk.js",
@@ -10,13 +10,13 @@
     "static/js/3.972b6dc2.chunk.js": "/digital-service/static/js/3.972b6dc2.chunk.js",
     "static/js/3.972b6dc2.chunk.js.map": "/digital-service/static/js/3.972b6dc2.chunk.js.map",
     "index.html": "/digital-service/index.html",
-    "static/css/main.dc4a7dfa.chunk.css.map": "/digital-service/static/css/main.dc4a7dfa.chunk.css.map",
+    "static/css/main.448d875c.chunk.css.map": "/digital-service/static/css/main.448d875c.chunk.css.map",
     "static/js/2.8eb4c386.chunk.js.LICENSE.txt": "/digital-service/static/js/2.8eb4c386.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.de250844.js",
     "static/js/2.8eb4c386.chunk.js",
-    "static/css/main.dc4a7dfa.chunk.css",
-    "static/js/main.49c1ab77.chunk.js"
+    "static/css/main.448d875c.chunk.css",
+    "static/js/main.7b6bbd7d.chunk.js"
   ]
 }
