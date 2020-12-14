@@ -1,0 +1,17 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 600px;
+  margin: 0 auto;
+  padding: 30px;
+  background-color: #424242;
+
+  &__input {
+    color: white;
+  }
+
+  &__update {
+    margin-top: 30px;
+  }
+}

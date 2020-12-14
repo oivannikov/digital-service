@@ -1,0 +1,31 @@
+.form__sign-in {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.validate,
+.validate::placeholder {
+  color: #26a69a;
+  opacity: 0.7;
+}
+
+.register {
+  transition: 1.5s;
+  color: #26a69a;
+  cursor: pointer;
+}
+
+.prompt {
+  transition: font-size 1.5s;
+  font-size: 18px;
+}
+
+.text {
+  position: relative;
+}
+
+.row .col {
+  padding: 0;
+}

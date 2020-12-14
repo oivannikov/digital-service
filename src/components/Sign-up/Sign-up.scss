@@ -1,0 +1,31 @@
+.signUp {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 460px;
+  margin: 0 auto;
+}
+
+.input-field {
+  width: 210px;
+}
+
+.button__manipulation {
+  margin: 50px auto;
+
+  &-back,
+  &-signUp {
+    width: 140px;
+    margin: 0 10px;
+  }
+}
+
+.errors {
+  color: red;
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+}
+
+
+
