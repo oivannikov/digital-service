@@ -1,4 +1,4 @@
-.flex {
+.signUp {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -10,11 +10,12 @@
   width: 210px;
 }
 
-.button__regist {
+.button__manipulation {
   margin: 50px auto;
 
-  &-link {
-    padding: 0 46px;
+  &-back,
+  &-signUp {
+    width: 140px;
     margin: 0 10px;
   }
 }

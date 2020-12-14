@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import PropTypes from 'prop-types';
+
 import { useSelector, useDispatch } from 'react-redux';
 import { setUsers, setCurrentUser } from '../../../redux/actions';
 
@@ -104,4 +106,8 @@ export function UserEdit({ onTabChange }) {
       <button className="btn form__update" type="submit">Update</button>
     </form>
   );
+}
+
+UserEdit.propTypes = {
+  onTabChange: PropTypes.func.isRequired,
 }

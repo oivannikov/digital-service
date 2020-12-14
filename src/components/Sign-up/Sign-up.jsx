@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 
+import PropTypes from 'prop-types';
+
 import { useSelector } from 'react-redux';
 
 import './Sign-up.scss';
 
-export function SignUp({ setNewUser, setRegister }) {
+export function SignUp({ setNewUser, onRegister }) {
   const [fullName, setFullName] = useState('');
   const [position, setPosition] = useState('');
   const [phone, setPhone] = useState('');
@@ -17,11 +19,8 @@ export function SignUp({ setNewUser, setRegister }) {
 
   function handleSignUpSubmit(e) {
     e.preventDefault();
-    
-    console.log('her1');
   
     if (errors.errorReTypePassword) {
-      console.log('here2');
       return ;
     }
 
@@ -49,7 +48,6 @@ export function SignUp({ setNewUser, setRegister }) {
   }
 
   function handleReTypePassword() {
-    console.log('blur');
     if (errors.errorReTypePassword) {
       setErrors({});
     }
@@ -75,13 +73,8 @@ export function SignUp({ setNewUser, setRegister }) {
     }
   }
 
-  function handleRegistr(e) {
-    // e.stopPropagation();
-    setRegister(false);
-  }
-
   return (
-		<form className="register-form flex" onSubmit={(e) => handleSignUpSubmit(e)} onKeyPress={(e) => handleKeyPress(e)}> 
+		<form className="register-form signUp" onSubmit={(e) => handleSignUpSubmit(e)} onKeyPress={(e) => handleKeyPress(e)}> 
       <div className="input-field">
         <input
           className="validate"
@@ -149,10 +142,15 @@ export function SignUp({ setNewUser, setRegister }) {
         { errors?.errorReTypePassword && <div className="errors">{ errors.errorReTypePassword }</div> }
       </div>
 
-      <div className="button__regist">
-        <button className="btn waves-effect button__regist-link" type="button" onClick={(e) => handleRegistr(e)}>Back</button>
-        <button className="btn waves-effect button__regist-link">Sign Up</button>
+      <div className="button__manipulation">
+        <button className="btn waves-effect button__manipulation-back" type="button" onClick={() => onRegister(false)}>Back</button>
+        <button className="btn waves-effect button__manipulation-signUp">Sign Up</button>
       </div>
 		</form>
   );
+}
+
+SignUp.propTypes = {
+  setNewUser: PropTypes.func.isRequired,
+  onRegister: PropTypes.func.isRequired,
 }

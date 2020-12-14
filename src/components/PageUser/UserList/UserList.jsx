@@ -11,9 +11,9 @@ export function UserList() {
   const user = useSelector(state => state.currentUser);
 
   return (
-    <ul className="users">
+    <ul className="userList">
     { users.map(({ fullName, id }) => (
-      <li className={classNames('user', {'active-user': user.id === id})} key={id}>
+      <li className={classNames('userList__user', {'userList__user--active': user.id === id})} key={id}>
         { fullName }
       </li>
     ))}

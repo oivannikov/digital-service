@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -8,7 +9,7 @@ import { setAuthUser, setCurrentUser } from '../../redux/actions';
 
 import './Sign-in.scss';
 
-export function SignIn({ setRegister }) {
+export function SignIn({ onRegister }) {
   const [signInLogin, setSignInLogin] = useState('');
   const [signInPassword, setSignInPassword] = useState('');
   const [errorSignIn, setErrorSignIn] = useState(false);
@@ -29,10 +30,10 @@ export function SignIn({ setRegister }) {
       return ;
     }
 
-    setErrors({});
     dispatch(setCurrentUser(user));
     dispatch(setAuthUser(true));
     setErrorSignIn(false);
+    setErrors({});
   }
 
   function handleSignInLogin(target) {
@@ -86,8 +87,7 @@ export function SignIn({ setRegister }) {
 
             <span
               className={classNames('register', {'prompt': errorSignIn})}
-              onClick={() => setRegister(true)}
-              // href="#"
+              onClick={() => onRegister(true)}
             >
               &thinsp;Register now
             </span>
@@ -97,4 +97,8 @@ export function SignIn({ setRegister }) {
       </div>
     </form>
   );
+}
+
+SignIn.propTypes = {
+  onRegister: PropTypes.func.isRequired,
 }
